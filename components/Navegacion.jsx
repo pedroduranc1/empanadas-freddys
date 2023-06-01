@@ -43,7 +43,7 @@ export default function Navegacion() {
             Inventario de Empanadas
           </Link>
           <Link
-            href="/cliente"
+            href="/"
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             Mis Clientes
@@ -58,7 +58,7 @@ export default function Navegacion() {
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link
-            href="#"
+            href="/registrarCliente"
             className="text-sm font-semibold leading-6 text-gray-900"
           >
             Registrar Cliente <span aria-hidden="true">&rarr;</span>

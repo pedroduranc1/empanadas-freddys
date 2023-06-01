@@ -1,11 +1,13 @@
 "use client";
 
 import React from 'react'
-import Button from './Button'
+import { Empanadas } from '@/api/Empanadas';
+
+const empanadasCtrl = new Empanadas();
 
 const Form = ({children}) => {
 
-    const ObtenerData = (e) => {
+    const ObtenerData = async (e) => {
         //NO ME ACTUALIZA LA PAGINA
         e.preventDefault()
 
@@ -15,9 +17,8 @@ const Form = ({children}) => {
         const data = Object.fromEntries(formData.entries())
 
         //INFO 
-        //console.log(data)
+        await empanadasCtrl.createEmpanada(data)
         LimpiarData()
-
     }
 
 
@@ -29,9 +30,8 @@ const Form = ({children}) => {
     }
 
   return (
-    <form onSubmit={ObtenerData} id='FormReset' className="w-full bg-slate-100 rounded-md p-4 max-w-lg">
+    <form onSubmit={ObtenerData} id='FormReset' className="w-full mx-auto grid place-content-center bg-slate-100 rounded-md p-4 max-w-lg">
         {children}
-        <Button/>
     </form>
   )
 }

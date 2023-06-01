@@ -28,7 +28,7 @@ const page = () => {
   return (
     <>
       <div className="grid place-content-center text-4xl text-white">
-        Cliente Page
+        Registrar Cliente
       </div>
 
       <div className="w-full mt-10 grid place-content-center">
