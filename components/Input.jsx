@@ -14,7 +14,7 @@ const Input = ({type,name,placeholder}) => {
         id={name}
         name={name}
         type={type}
-        placeholder={placeholder}
+        placeholder={placeholder ? placeholder : name}
       />
     </>
   );

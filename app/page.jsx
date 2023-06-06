@@ -15,6 +15,8 @@ export default function Home() {
   const [Empanadas, setEmpanadas] = useState(null);
   const [refresh, setrefresh] = useState(false)
 
+  const [modEmpanada, setmodEmpanada] = useState(null)
+
   useEffect(() => {
     (async () => {
       const { data } = await empanadasCtrl.getEmpanadas();
@@ -26,20 +28,23 @@ export default function Home() {
     <>
       <h1 className="text-center text-4xl text-white">INICIO</h1>
 
-      <div className={styles.form}>
-        <Form>
+      <div className={...styles.form}>
+        <Form setrefresh={setrefresh} modEmpanada={modEmpanada}>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full md:w-1/3 px-3">
-              <Input type="text" name="nombre" placeholder="Queso" />
+              <Input type="text" name="nombre" placeholder={modEmpanada ? modEmpanada?.attributes.nombre : ""}  />
             </div>
             <div className="w-full md:w-1/3 px-3">
-              <Input type="number" name="Cantidad" placeholder="1" />
+              <Input type="number" name="Cantidad" placeholder={modEmpanada ? modEmpanada?.attributes.cantidad : ""} />
             </div>
             <div className="w-full md:w-1/3 px-3">
-              <Input type="number" name="Precio" placeholder="1" />
+              <Input type="number" name="Precio" placeholder={modEmpanada ? modEmpanada?.attributes.precio : ""} />
             </div>
           </div>
-          <Button type="submit" onClick={()=>setrefresh(!refresh)}/>
+          {
+            modEmpanada != null ? (<Button type="submit">Actualizar</Button>) : (<Button type="submit" onClick={()=>{setrefresh(!refresh)}}>Enviar</Button>)
+          }
+          {/* <Button type="submit" onClick={()=>{setrefresh(!refresh)}}>Enviar</Button> */}
         </Form>
 
         {/* MOSTRAR LAS EMPANADAS QUE TENGO */}
@@ -50,7 +55,7 @@ export default function Home() {
         <div className="grid place-content-center gap-4 grid-cols-4">
           {/* COMPENTE CARTA DE EMPANADA */}
           {Empanadas?.map((empanada) => (
-            <Card key={empanada.id} empanadaInfo={empanada.attributes} />
+            <Card key={empanada.id} modEmpanada={setmodEmpanada} setrefresh={setrefresh} empanadaInfo={empanada} />
           ))}
         </div>
       </div>
